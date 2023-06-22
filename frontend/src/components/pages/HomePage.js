@@ -37,7 +37,7 @@ export default class HomePage extends Component  {
                 </Grid>
                 <Grid item xs={12} align='center'>
                     <ButtonGroup disableElevation variant='contained' color='primary'>
-                        <Button color="primary" to='/join' component={Link}>Join 2 ROOM </Button>
+                        <Button color="primary" to='/join' component={Link}>Join a Room </Button>
                         <Button color="secondary" to='/create' component={Link}>Create a Room </Button>
                     </ButtonGroup>
                 </Grid>
