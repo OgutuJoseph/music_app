@@ -17,6 +17,8 @@ export default class Room extends Component {
         this.updateShowSettings = this.updateShowSettings.bind(this);
         this.renderSettingsButton = this.renderSettingsButton.bind(this);
         this.renderSettings = this.renderSettings.bind(this);
+        // to allow function passed as prop to work
+        this.getRoomDetails = this.getRoomDetails.bind(this);
     }
 
     getRoomDetails() {
@@ -72,10 +74,11 @@ export default class Room extends Component {
             <Grid container spacing={1}>
                 <Grid item xs={12} align='center'>
                     <CreateRoomPage 
-                        update={true} 
                         roomCode={this.roomCode}
                         guestCanPause={this.state.guestCanPause} 
                         votesToSkip={this.state.votesToSkip}
+                        update={true} 
+                        updateCallback={this.getRoomDetails}
                     />
                 </Grid>
                 <Grid item xs={12} align='center'>
@@ -94,21 +97,21 @@ export default class Room extends Component {
         return <Grid container spacing={1}>
             <Grid item xs={12} align='center'>
                 <Typography variant="h4" component="h4">
-                    Code: {this.roomCode}
+                    Room Code: {this.roomCode}
                 </Typography>
             </Grid>
             <Grid item xs={12} align='center'>
-                <Typography variant="h4" component="h4">
+                <Typography variant="h6" component="h6">
                     Votes to Skip: {this.state.votesToSkip}
                 </Typography>
             </Grid>
             <Grid item xs={12} align='center'>
-                <Typography variant="h4" component="h4">
+                <Typography variant="h6" component="h6">
                     Guest Can Pause: {this.state.guestCanPause.toString()}
                 </Typography>
             </Grid>
             <Grid item xs={12} align='center'>
-                <Typography variant="h4" component="h4">
+                <Typography variant="h6" component="h6">
                     Host: {this.state.isHost}
                 </Typography>
             </Grid>

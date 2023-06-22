@@ -128,12 +128,12 @@ class UpdateRoom(APIView):
             self.request.session.create()
 
         serializer = self.serializer_class(data=request.data)
-        if serializer.is_valid:
+        if serializer.is_valid():
             code = serializer.data.get('code')
             guest_can_pause = serializer.data.get('guest_can_pause')
             votes_to_skip = serializer.data.get('votes_to_skip')
 
-            queryset = Room.onjects.filter(code=code)
+            queryset = Room.objects.filter(code=code)
             if not queryset.exists():
                 return Response({'Not Present': 'Room code not found.'}, status=status.HTTP_404_NOT_FOUND)
             
