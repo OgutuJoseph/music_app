@@ -113,7 +113,7 @@ export default class CreateRoomPage extends Component  {
     };
 
     render() {
-        const title = this.props.update ? "Update Room Details": "Create Room" 
+        const title = this.props.update ? "Update Room Details.": "Create Room" 
 
         return <Grid container spacing={1}> 
             <Grid item xs={12} align="center">
