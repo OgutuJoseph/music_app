@@ -12,20 +12,19 @@ export default class HomePage extends Component  {
             roomCode: null
         };
         this.clearRoomCode = this.clearRoomCode.bind(this);
-    }
+    };
 
     async componentDidMount() {
-        fetch('/api/user-in-room').then(
-            (response) => response.json()
-        ).then(
-            (data) => {
+        fetch('/api/user-in-room')
+        .then((response) => response.json())
+        .then((data) => {
                 // console.log('reseponse data here: ', data)
                 this.setState({
                     roomCode: data.code
                 })
             }
         )
-    }
+    };
 
     renderHomePage () {
         return (
@@ -43,13 +42,13 @@ export default class HomePage extends Component  {
                 </Grid>
             </Grid>
         );
-    }
+    };
 
     clearRoomCode() {
         this.setState({
             roomCode: null
         })
-    }
+    };
 
     render() {
         return <Router>
@@ -71,5 +70,5 @@ export default class HomePage extends Component  {
                 />
             </Switch>
         </Router>
-    }
-}
+    };
+};
