@@ -13,7 +13,7 @@ export default class RoomJoinPage extends Component  {
         // Underscore prefix denotes that it is a private method, i.e., cannot be used in another component
         this._handleTextFieldChange = this._handleTextFieldChange.bind(this);
         this._roomButtonPressed = this._roomButtonPressed.bind(this);
-    }
+    };
 
     render() {
         return (
@@ -32,7 +32,7 @@ export default class RoomJoinPage extends Component  {
                 </Grid>
             </Grid>
         )
-    }
+    };
 
     _handleTextFieldChange(e) {
         this.setState({
@@ -49,14 +49,15 @@ export default class RoomJoinPage extends Component  {
             })
         };
 
-        fetch('/api/join-room', requestOptions).then(
-            (response) => {
+        fetch('/api/join-room', requestOptions)
+        .then((response) => {
                 if (response.ok) {
                     this.props.history.push(`/room/${this.state.roomCode}`)
                 } else {
                     this.setState({ error: 'Room not found.' })
                 }
             }
-        ).catch((error) => console.log(error))
-    }
-}
+        )
+        .catch((error) => console.log(error))
+    };
+};

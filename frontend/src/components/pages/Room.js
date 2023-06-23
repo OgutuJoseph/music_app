@@ -9,7 +9,8 @@ export default class Room extends Component {
             votesToSkip: 2,
             guestCanPause: false,
             isHost: false,
-            showSettings: false
+            showSettings: false,
+            spotifyAuthenticated: false
         };
         this.roomCode = this.props.match.params.roomCode;
         this.getRoomDetails();
@@ -19,10 +20,12 @@ export default class Room extends Component {
         this.renderSettings = this.renderSettings.bind(this);
         // to allow function passed as prop to work
         this.getRoomDetails = this.getRoomDetails.bind(this);
-    }
+        this.authenticateSpotify = this.authenticateSpotify.bind(this);
+    };
 
     getRoomDetails() {
-        fetch('/api/get-room' + '?code=' + this.roomCode).then(
+        fetch('/api/get-room' + '?code=' + this.roomCode)
+        .then(
             // (response) => response.json()
             (response) => {
                 if (!response.ok){ 
@@ -31,16 +34,37 @@ export default class Room extends Component {
                 } 
                 return response.json()
             }
-        ).then(
-            (data) => { 
+        )
+        .then((data) => { 
                 this.setState({
                     votesToSkip: data.votes_to_skip,
                     guestCanPause: data.guest_can_pause,
                     isHost: data.host
                 })
+                // if (this.state.isHost) {
+                //     this.authenticateSpotify()
+                // }                
             }
         )
-    }
+    };
+
+    authenticateSpotify() {
+        fetch('/spotify/is-authenticated')
+        .then((response) => response.json())
+        .then((data) => {
+                this.setState({
+                    spotifyAuthenticated: data.status
+                })
+                if (!data.status) {
+                    fetch('/spotify/get-auth-url')
+                    .then((response) => response.json())
+                    .then((data) => {
+                        window.location.replace(data.url)
+                    })
+                }
+            }
+        )
+    };
 
     leaveRoom() {
         const requestOptions = {
@@ -51,13 +75,13 @@ export default class Room extends Component {
             // this.props.leaveRoomCallBack();
             this.props.history.push('/');
         })
-    }
+    };
 
     updateShowSettings(value) {
         this.setState({
             showSettings: value
         })
-    }
+    };
 
     renderSettingsButton() {
         return(
@@ -67,7 +91,7 @@ export default class Room extends Component {
                 </Button>
             </Grid>
         )
-    }
+    };
 
     renderSettings() {
         return (
@@ -88,7 +112,7 @@ export default class Room extends Component {
                 </Grid>
             </Grid>
         )
-    }
+    };
 
     render() {
         if (this.state.showSettings) {
@@ -122,5 +146,5 @@ export default class Room extends Component {
                 </Button>
             </Grid>
         </Grid>
-    }
+    };
 }

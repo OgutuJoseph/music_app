@@ -78,9 +78,9 @@ export default class CreateRoomPage extends Component  {
                 votes_to_skip: this.state.votesToSkip,
             })
         }
-        fetch('/api/create-room', requestOptions).then(
-            (response) => response.json()
-        ).then(
+        fetch('/api/create-room', requestOptions)
+        .then((response) => response.json())
+        .then(
             // (data) => console.log('data returned: ', data)
             (data) => this.props.history.push('/room/' + data.code)
         )
@@ -96,8 +96,8 @@ export default class CreateRoomPage extends Component  {
                 votes_to_skip: this.state.votesToSkip,
             })
         }
-        fetch('/api/update-room', requestOptions).then(
-            (response) => {
+        fetch('/api/update-room', requestOptions)
+        .then((response) => {
                 if (response.ok) {
                     this.setState({
                         successMsg : "Room updated successfully."
@@ -159,4 +159,4 @@ export default class CreateRoomPage extends Component  {
             {this.props.update ? this.renderUpdateButtons() : this.renderCreateButtons()}
         </Grid>
     };
-}
+};
