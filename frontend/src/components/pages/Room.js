@@ -41,17 +41,20 @@ export default class Room extends Component {
                     guestCanPause: data.guest_can_pause,
                     isHost: data.host
                 })
-                // if (this.state.isHost) {
-                //     this.authenticateSpotify()
-                // }                
+                if (this.state.isHost) {
+                    this.authenticateSpotify()
+                }                
             }
         )
     };
 
     authenticateSpotify() {
         fetch('/spotify/is-authenticated')
-        .then((response) => response.json())
+        .then((response) => {response.json()
+            console.log('spotify auth response: ', response)
+        })
         .then((data) => {
+            console.log('spotify auth response data: ', data)
                 this.setState({
                     spotifyAuthenticated: data.status
                 })
