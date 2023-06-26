@@ -50,9 +50,7 @@ export default class Room extends Component {
 
     authenticateSpotify() {
         fetch('/spotify/is-authenticated')
-        .then((response) => {response.json()
-            console.log('spotify auth response: ', response)
-        })
+        .then((response) => response.json())
         .then((data) => {
             console.log('spotify auth response data: ', data)
                 this.setState({
